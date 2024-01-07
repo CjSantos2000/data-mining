@@ -134,7 +134,6 @@ def recommend_course(*args, **kwargs):
         ),
         columns=mlb.classes_,
     )
-    breakpoint()
     print(question_result_encoded_1)
     print("-" * 100)
     print(filtered_courses_1["SKILL LEVEL"])
@@ -206,6 +205,24 @@ def recommend_course(*args, **kwargs):
             "courses": {
                 1: recommended_courses_1.to_dict(orient="records"),
                 2: recommended_courses_2.to_dict(orient="records"),
+            },
+            "evaluation": {
+                "writing": {
+                    "score": question_results["Writing_total_percent"][0],
+                    "level": question_results["Writing_Level"][0],
+                },
+                "listening": {
+                    "score": question_results["Listening_total_percent"][0],
+                    "level": question_results["Listening_Level"][0],
+                },
+                "speaking": {
+                    "score": question_results["Speaking_total_percent"][0],
+                    "level": question_results["Speaking_Level"][0],
+                },
+                "reading": {
+                    "score": question_results["Reading_total_percent"][0],
+                    "level": question_results["Reading_Level"][0],
+                },
             },
         }
     )
