@@ -92,9 +92,10 @@ def recommend_course(*args, **kwargs):
     lowest_types = sorted(
         types, key=lambda x: question_results[f"{x}_total_percent"][0]
     )[:2]
-    filtered_courses = courses[courses["TYPE"].isin(lowest_types)].drop(
-        ["Unnamed: 4", "Unnamed: 5"], axis=1
-    )
+    filtered_courses = courses[courses["TYPE"].isin(lowest_types)]
+    # filtered_courses = courses[courses["TYPE"].isin(lowest_types)].drop(
+    #     ["Unnamed: 4", "Unnamed: 5"], axis=1
+    # )
 
     print("-" * 100)
     print(filtered_courses)
@@ -111,7 +112,7 @@ def recommend_course(*args, **kwargs):
         lowest_types[1],
     )
 
-    filtered_courses_combine = pd.concat([filtered_courses_1, filtered_courses_2])
+    # filtered_courses_combine = pd.concat([filtered_courses_1, filtered_courses_2])
 
     # Recommend Courses 1 ---------------------------------------------------------------------------------------------
 
