@@ -155,44 +155,44 @@ def recommend_course(*args, **kwargs):
     print(recommended_courses_1)
     # ------------------------------------------------------------------------------------------------------------------------
 
-    # Recommend Courses 2 ----------------------------------------------------------------------------------------------------
+    # # Recommend Courses 2 ----------------------------------------------------------------------------------------------------
 
-    # Convert skill levels to numeric representation for cosine similarity
-    courses_encoded_2 = pd.DataFrame(
-        mlb.fit_transform(
-            filtered_courses_2["SKILL LEVEL"].apply(lambda x: x.split(", "))
-        ),
-        columns=mlb.classes_,
-    )
+    # # Convert skill levels to numeric representation for cosine similarity
+    # courses_encoded_2 = pd.DataFrame(
+    #     mlb.fit_transform(
+    #         filtered_courses_2["SKILL LEVEL"].apply(lambda x: x.split(", "))
+    #     ),
+    #     columns=mlb.classes_,
+    # )
 
-    question_result_encoded_2 = pd.DataFrame(
-        mlb.fit_transform(
-            question_results[
-                [
-                    f"{lowest_types[1]}_Level",
-                ]
-            ].values.reshape(1, -1)
-        ),
-        columns=mlb.classes_,
-    )
-    courses_encoded_subset_2 = courses_encoded_2[question_result_encoded_2.columns]
+    # question_result_encoded_2 = pd.DataFrame(
+    #     mlb.fit_transform(
+    #         question_results[
+    #             [
+    #                 f"{lowest_types[1]}_Level",
+    #             ]
+    #         ].values.reshape(1, -1)
+    #     ),
+    #     columns=mlb.classes_,
+    # )
+    # courses_encoded_subset_2 = courses_encoded_2[question_result_encoded_2.columns]
 
-    # Calculate cosine similarity
-    cosine_similarity_result_2 = cosine_similarity(
-        question_result_encoded_1, courses_encoded_subset_2
-    )
+    # # Calculate cosine similarity
+    # cosine_similarity_result_2 = cosine_similarity(
+    #     question_result_encoded_1, courses_encoded_subset_2
+    # )
 
-    # Find the indices of the top 2 most similar records
-    all_similar_indices_2 = cosine_similarity_result_2[0].argsort()[::-1].tolist()
+    # # Find the indices of the top 2 most similar records
+    # all_similar_indices_2 = cosine_similarity_result_2[0].argsort()[::-1].tolist()
 
-    # Get 2 random indices from the list of all similar records
-    random_indices_2 = random.sample(all_similar_indices_2, 2)
+    # # Get 2 random indices from the list of all similar records
+    # random_indices_2 = random.sample(all_similar_indices_2, 2)
 
-    # Recommend the top 2 courses
-    recommended_courses_2 = filtered_courses_2.iloc[random_indices_2]
+    # # Recommend the top 2 courses
+    # recommended_courses_2 = filtered_courses_2.iloc[random_indices_2]
 
-    print("Recommended Courses 2:")
-    print(recommended_courses_2)
+    # print("Recommended Courses 2:")
+    # print(recommended_courses_2)
 
     # ------------------------------------------------------------------------------------------------------------------------
 
@@ -200,7 +200,6 @@ def recommend_course(*args, **kwargs):
         {
             "courses": {
                 1: recommended_courses_1.to_dict(orient="records"),
-                2: recommended_courses_2.to_dict(orient="records"),
             },
         }
     )
